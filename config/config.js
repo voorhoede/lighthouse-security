@@ -13,20 +13,20 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-      'gather/request-headers',
-      'gather/csp-meta',
-      'gather/redirect'
+      './gather/request-headers',
+      './gather/csp-meta',
+      './gather/redirect'
     ],
   }],
 
   // 3. Add custom audit to the list of audits 'lighthouse:default' will run.
   audits: [
-    'audits/csp',
-    'audits/csp-meta',
-    'audits/xss-protection-header',
-    'audits/cookie-httponly',
-    'audits/cookie-secure',
-    'audits/redirect',
+    './audits/csp',
+    './audits/csp-meta',
+    './audits/xss-protection-header',
+    './audits/cookie-httponly',
+    './audits/cookie-secure',
+    './audits/redirect',
     'node_modules/lighthouse/lighthouse-core/audits/is-on-https',
     'node_modules/lighthouse/lighthouse-core/audits/dobetterweb/external-anchors-use-rel-noopener'
   ],
