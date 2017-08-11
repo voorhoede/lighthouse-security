@@ -4,6 +4,7 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 'use strict';
+const path = require('path');
 
 module.exports = {
   // 1. Run your custom tests along with all the default Lighthouse tests.
@@ -13,20 +14,20 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-      './gather/request-headers',
-      './gather/csp-meta',
-      './gather/redirect'
+      path.join(__dirname, '../gather/request-headers'),
+      path.join(__dirname, '../gather/csp-meta'),
+      path.join(__dirname, '../gather/redirect')
     ],
   }],
 
   // 3. Add custom audit to the list of audits 'lighthouse:default' will run.
   audits: [
-    './audits/csp',
-    './audits/csp-meta',
-    './audits/xss-protection-header',
-    './audits/cookie-httponly',
-    './audits/cookie-secure',
-    './audits/redirect',
+    path.join(__dirname, '../audits/csp'),
+    path.join(__dirname, '../audits/csp-meta'),
+    path.join(__dirname, '../audits/xss-protection-header'),
+    path.join(__dirname, '../audits/cookie-httponly'),
+    path.join(__dirname, '../audits/cookie-secure'),
+    path.join(__dirname, '../audits/redirect'),
     'node_modules/lighthouse/lighthouse-core/audits/is-on-https',
     'node_modules/lighthouse/lighthouse-core/audits/dobetterweb/external-anchors-use-rel-noopener'
   ],
