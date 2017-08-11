@@ -5,6 +5,11 @@
  */
 'use strict';
 const path = require('path');
+const dirs = {
+    lighthouse: require.resolve('lighthouse'),
+    audits: path.join(__dirname, '..', 'audits'),
+    gatherers: path.join(__dirname, '..', 'gather'),
+}
 
 module.exports = {
   // 1. Run your custom tests along with all the default Lighthouse tests.
@@ -14,22 +19,24 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-      path.join(__dirname, '../gather/request-headers'),
-      path.join(__dirname, '../gather/csp-meta'),
-      path.join(__dirname, '../gather/redirect')
-    ],
+      'request-headers',
+      'csp-meta',
+      'redirect'
+    ].map(basename => path.join(dirs.gatherers, basename)),
   }],
 
   // 3. Add custom audit to the list of audits 'lighthouse:default' will run.
   audits: [
-    path.join(__dirname, '../audits/csp'),
-    path.join(__dirname, '../audits/csp-meta'),
-    path.join(__dirname, '../audits/xss-protection-header'),
-    path.join(__dirname, '../audits/cookie-httponly'),
-    path.join(__dirname, '../audits/cookie-secure'),
-    path.join(__dirname, '../audits/redirect'),
-    'node_modules/lighthouse/lighthouse-core/audits/is-on-https',
-    'node_modules/lighthouse/lighthouse-core/audits/dobetterweb/external-anchors-use-rel-noopener'
+     ...[
+        'csp',
+        'csp-meta',
+        'xss-protection-header',
+        'cookie-httponly',
+        'cookie-secure',
+        'redirect',
+    ].map(basename => path.join(dirs.audits, basename)),
+    './audits/is-on-https',
+    './audits/dobetterweb/external-anchors-use-rel-noopener'
   ],
 
   // 4. Create a new 'My site metrics' section in the default report for our results.
