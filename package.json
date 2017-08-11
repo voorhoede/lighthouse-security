@@ -1,0 +1,20 @@
+{
+  "name": "lighthouse-security",
+  "description": "Runs the default Google Lighthouse tests with additional security tests",
+  "version": "0.1.0",
+  "bin": {
+    "lighthouse-security": "./bin/index.js"
+  },
+  "author": "Marko Malis",
+  "keywords": [
+    "lighthouse",
+    "websec",
+    "security",
+    "websecurity"
+  ],
+  "dependencies": {
+    "lighthouse": "^2.3.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  }
+}
