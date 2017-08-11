@@ -1,10 +1,10 @@
 {
   "name": "lighthouse-security",
   "description": "Runs the default Google Lighthouse tests with additional security tests",
-  "version": "0.1.0",
-  "engineStrict" : true,
-  "engines" : {
-      "node" : ">=8.3.0"
+  "version": "0.2.0",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=8.3.0"
   },
   "bin": {
     "lighthouse-security": "./bin/index.js"
