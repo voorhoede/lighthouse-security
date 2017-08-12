@@ -13,7 +13,7 @@ class MetaGeneratorAudit extends Audit {
           'web framework fingerprinting. The tag exposes known vulnerabilities ' +
           'in unpatched versions as well as specific misconfigurations in the ' +
           'framework and known file structures. ' +
-          '[Learn more](https://goo.gl/67tR4s).',
+          '[Learn more](https://goo.gl/XhsuhC).',
       requiredArtifacts: ['MetaGenerator']
     };
   }

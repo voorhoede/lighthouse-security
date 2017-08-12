@@ -6,7 +6,7 @@ class MetaGenerator extends Gatherer {
 
   /**
    * @param {{driver: !Object}} options Run options
-   * @return {!Promise<?string>} The value of the viewport meta's content attribute, or null
+   * @return {!Promise<?string>} The value of the generator meta's content attribute, or null
    */
   afterPass(options) {
     const driver = options.driver;
