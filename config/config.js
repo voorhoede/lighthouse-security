@@ -13,7 +13,7 @@ const dirs = {
 
 module.exports = {
   // 1. Run your custom tests along with all the default Lighthouse tests.
-  // extends: 'lighthouse:default',
+  extends: 'lighthouse:default',
 
   // 2. Add gatherer to the default Lighthouse load ('pass') of the page.
   passes: [{
