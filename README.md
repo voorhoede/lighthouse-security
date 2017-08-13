@@ -26,8 +26,33 @@ The extension can also be used within your code. A short example is given below.
 To render reports etc. it is recommended to import functionality from Lighthouse.
 
 ```javascript
-const lighthouseSecurity = require('lighthouse-security')
+const runLighthouse = require('lighthouse-security')
 
-lighthouseSecurity(url, flags, config)
+runLighthouse(url, flags)
   .then(results => console.log(results))
+```
+
+Alternatively you can import just the `lighthouse-security` configuration and use it in your own runner:
+
+```javascript
+const lighthouse = require('lighthouse')
+const chromeLauncher = require('lighthouse/chrome-launcher')
+
+// import one or more lighthouse configs:
+const securityConfig = require('lighthouse-security/config')
+
+// combine configs into one:
+const config = Object.assign({},
+  pageSecurityConfig,
+  { extends: 'lighthouse:default' }
+)
+
+// run lighthouse as usual:
+async function run(url, flags = {}) {  
+    const chrome = await chromeLauncher.launch()
+    flags.port = chrome.port
+    const results = await lighthouse(url, flags, config)
+    const stopped = await chrome.kill()
+    return results
+}
 ```
