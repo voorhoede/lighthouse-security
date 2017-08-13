@@ -13,7 +13,7 @@ const dirs = {
 
 module.exports = {
   // 1. Run your custom tests along with all the default Lighthouse tests.
-  extends: 'lighthouse:default',
+  // extends: 'lighthouse:default',
 
   // 2. Add gatherer to the default Lighthouse load ('pass') of the page.
   passes: [{
@@ -34,6 +34,7 @@ module.exports = {
         'cookie-httponly',
         'cookie-secure',
         'redirect',
+        'x-generator-header',
     ].map(basename => path.join(dirs.audits, basename)),
     './audits/is-on-https',
     './audits/dobetterweb/external-anchors-use-rel-noopener'
@@ -52,7 +53,8 @@ module.exports = {
         {id: 'cookie-secure-audit', weight: 1},
         {id: 'http-redirect-audit', weight: 1},
         {id: 'is-on-https', weight: 1},
-        {id: 'external-anchors-use-rel-noopener', weight: 0}
+        {id: 'external-anchors-use-rel-noopener', weight: 0},
+        {id: 'x-generator-header', weight:1}
       ]
     }
   }
