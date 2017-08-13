@@ -19,10 +19,15 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-      'request-headers',
-      'csp-meta',
-      'redirect'
-    ].map(basename => path.join(dirs.gatherers, basename)),
+      ...[
+        'request-headers',
+        'csp-meta',
+        'redirect'
+      ].map(basename => path.join(dirs.gatherers, basename)), 
+      './gather/gatherers/dobetterweb/anchors-with-no-rel-noopener',
+      './gather/gatherers/dobetterweb/password-inputs-with-prevented-paste',
+      './gather/gatherers/url',
+    ]
   }],
 
   // 3. Add custom audit to the list of audits 'lighthouse:default' will run.
@@ -36,7 +41,8 @@ module.exports = {
         'redirect',
     ].map(basename => path.join(dirs.audits, basename)),
     './audits/is-on-https',
-    './audits/dobetterweb/external-anchors-use-rel-noopener'
+    './audits/dobetterweb/external-anchors-use-rel-noopener',
+    './audits/dobetterweb/password-inputs-can-be-pasted-into',
   ],
 
   // 4. Create a new 'My site metrics' section in the default report for our results.
@@ -52,7 +58,8 @@ module.exports = {
         {id: 'cookie-secure-audit', weight: 1},
         {id: 'http-redirect-audit', weight: 1},
         {id: 'is-on-https', weight: 1},
-        {id: 'external-anchors-use-rel-noopener', weight: 0}
+        {id: 'external-anchors-use-rel-noopener', weight: 0},
+        {id: 'password-inputs-can-be-pasted-into', weight: 1}
       ]
     }
   }
