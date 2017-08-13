@@ -21,7 +21,8 @@ module.exports = {
     gatherers: [
       'request-headers',
       'csp-meta',
-      'redirect'
+      'redirect',
+      'ssl-grade',
     ].map(basename => path.join(dirs.gatherers, basename)),
   }],
 
@@ -34,6 +35,7 @@ module.exports = {
         'cookie-httponly',
         'cookie-secure',
         'redirect',
+        'ssl-grade',
     ].map(basename => path.join(dirs.audits, basename)),
     './audits/is-on-https',
     './audits/dobetterweb/external-anchors-use-rel-noopener'
@@ -52,7 +54,8 @@ module.exports = {
         {id: 'cookie-secure-audit', weight: 1},
         {id: 'http-redirect-audit', weight: 1},
         {id: 'is-on-https', weight: 1},
-        {id: 'external-anchors-use-rel-noopener', weight: 0}
+        {id: 'external-anchors-use-rel-noopener', weight: 0},
+        {id: 'ssl-grade', weight: 1}
       ]
     }
   }

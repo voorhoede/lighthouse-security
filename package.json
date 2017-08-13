@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "lighthouse": "^2.3.0",
+    "node-ssllabs": "0.5.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   }
