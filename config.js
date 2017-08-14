@@ -28,6 +28,7 @@ module.exports = {
         'cookie-secure',
         'redirect',
         'x-generator-header',
+        'x-frame-options-header',
     ].map(prefixDir(dirs.audits)),
     ...[
       'is-on-https',
@@ -49,7 +50,8 @@ module.exports = {
         {id: 'http-redirect-audit', weight: 1},
         {id: 'is-on-https', weight: 1},
         {id: 'external-anchors-use-rel-noopener', weight: 0},
-        {id: 'x-generator-header', weight:1}
+        {id: 'x-generator-header', weight:1},
+        {id: 'x-frame-options-header', weight: 1},
       ]
     }
   }
