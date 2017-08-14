@@ -37,7 +37,7 @@ module.exports = {
     ].map(basename => path.join(dirs.audits, basename)),
     './audits/is-on-https',
     './audits/dobetterweb/external-anchors-use-rel-noopener',
-    './audits/dobetterweb/no-websql
+    './audits/dobetterweb/no-websql'
   ],
 
   // 4. Create a new 'My site metrics' section in the default report for our results.
