@@ -1,5 +1,6 @@
 const Gatherer = require('lighthouse').Gatherer
 const ssllabs = require('node-ssllabs');
+const { URL } = require('url');
 
 const MAX_DURATION_SECONDS = 120;
 const LOCAL_DOMAINS = ['localhost', '127.0.0.1'];
@@ -7,24 +8,24 @@ const LOCAL_DOMAINS = ['localhost', '127.0.0.1'];
 const isLocalDomain = host => LOCAL_DOMAINS.includes(host);
 
 class SslGrade extends Gatherer {
-  afterPass(options) {
+  beforePass(options) {
     const driver = options.driver;
+    const origin = new URL(options.url).origin;
     const timeout = options._testTimeout || MAX_DURATION_SECONDS * 1000;
 
-    const sslTestPromise = driver.evaluateAsync('window.location.host')
-        .then(host => new Promise((resolve, reject) => {
-            if (isLocalDomain(host)) {
-                reject(new Error('Domain must be available over the public internet to test SSL.'));
-            }
+    const sslTestPromise = new Promise((resolve, reject) => {
+        if (isLocalDomain(origin)) {
+            reject(new Error('Domain must be available over the public internet to test SSL.'));
+        }
 
-            ssllabs.scan({ 
-                host, 
-                fromCache: 'off',
-                startNew: 'on',
-            }, (err, result) => {
-                err ? reject(err) : resolve(result);
-            });
-        }));
+        ssllabs.scan({ 
+            host: origin, 
+            fromCache: 'off',
+            startNew: 'on',
+        }, (err, result) => {
+            err ? reject(err) : resolve(result);
+        });
+    });
 
     let sslTestTimeout;
     const timeoutPromise = new Promise((resolve, reject) => {
@@ -33,7 +34,7 @@ class SslGrade extends Gatherer {
         }, timeout);
     });
 
-    return Promise.race([
+    options._sslGradePromise = Promise.race([
         sslTestPromise,
         timeoutPromise
     ]).then(result => {
@@ -44,6 +45,10 @@ class SslGrade extends Gatherer {
       clearTimeout(sslTestTimeout);
       throw err;
     });
+  }
+
+  afterPass(options) {
+      return options._sslGradePromise;
   }
 }
 
