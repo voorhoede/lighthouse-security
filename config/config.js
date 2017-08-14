@@ -38,7 +38,8 @@ module.exports = {
         'meta-generator',
     ].map(basename => path.join(dirs.audits, basename)),
     './audits/is-on-https',
-    './audits/dobetterweb/external-anchors-use-rel-noopener'
+    './audits/dobetterweb/external-anchors-use-rel-noopener',
+    './audits/dobetterweb/no-websql'
   ],
 
   // 4. Create a new 'My site metrics' section in the default report for our results.
@@ -56,6 +57,7 @@ module.exports = {
         {id: 'is-on-https', weight: 1},
         {id: 'meta-generator', weight: 1},
         {id: 'external-anchors-use-rel-noopener', weight: 0},
+        {id: 'no-websql', weight: 0},
       ]
     }
   }
