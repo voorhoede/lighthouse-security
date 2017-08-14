@@ -60,6 +60,7 @@ module.exports = {
         {id: 'external-anchors-use-rel-noopener', weight: 0},
         {id: 'x-generator-header', weight:1},
         {id: 'x-frame-options-header', weight: 1},
+        {id: 'password-inputs-can-be-pasted-into', weight: 1}
       ]
     }
   }
