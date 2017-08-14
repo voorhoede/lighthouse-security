@@ -11,6 +11,7 @@
     "lighthouse-security": "./bin/index.js"
   },
   "author": "Marko Malis",
+  "homepage": "https://github.com/voorhoede/lighthouse-security#readme",
   "keywords": [
     "lighthouse",
     "websec",
