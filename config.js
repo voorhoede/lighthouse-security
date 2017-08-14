@@ -4,6 +4,7 @@ const dirs = {
     audits: path.join(__dirname, 'audits'),
     gatherers: path.join(__dirname, 'gather'),
     lighthouseAudits: path.join(path.dirname(require.resolve('lighthouse')), 'audits'),
+    lighthouseGatherers: path.join(path.dirname(require.resolve('lighthouse')), 'gather', 'gatherers'),
 };
 const prefixDir = (dirname) => (basename) => path.join(dirname, basename);
 
@@ -12,10 +13,16 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-      'request-headers',
-      'csp-meta',
-      'redirect'
-    ].map(prefixDir(dirs.gatherers)),
+        ...[
+          'request-headers',
+          'csp-meta',
+          'redirect'
+        ].map(prefixDir(dirs.gatherers)),
+        ...[
+            'dobetterweb/anchors-with-no-rel-noopener',
+            'dobetterweb/password-inputs-with-prevented-paste',
+        ].map(prefixDir(dirs.lighthouseGatherers))
+    ]
   }],
 
   // Add custom audit to the list of audits 'lighthouse:default' will run.
@@ -33,6 +40,7 @@ module.exports = {
     ...[
       'is-on-https',
       'dobetterweb/external-anchors-use-rel-noopener',
+      'dobetterweb/password-inputs-can-be-pasted-into'
     ].map(prefixDir(dirs.lighthouseAudits))
   ],
 
@@ -52,6 +60,7 @@ module.exports = {
         {id: 'external-anchors-use-rel-noopener', weight: 0},
         {id: 'x-generator-header', weight:1},
         {id: 'x-frame-options-header', weight: 1},
+        {id: 'password-inputs-can-be-pasted-into', weight: 1}
       ]
     }
   }
