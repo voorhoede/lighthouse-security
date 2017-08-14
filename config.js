@@ -2,46 +2,48 @@
 const path = require('path');
 const dirs = {
     audits: path.join(__dirname, 'audits'),
-    gatherers: path.join(__dirname, 'gather'),
+    gatherers: path.join(__dirname, 'gather', 'gatherers'),
     lighthouseAudits: path.join(path.dirname(require.resolve('lighthouse')), 'audits'),
     lighthouseGatherers: path.join(path.dirname(require.resolve('lighthouse')), 'gather', 'gatherers'),
 };
-const prefixDir = (dirname) => (basename) => path.join(dirname, basename);
+const addDirFiles = (dirname, basenames) => basenames.map(basename => path.join(dirname, basename));
 
 module.exports = {
   // Add gatherer to the default Lighthouse load ('pass') of the page.
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-        ...[
-          'request-headers',
+        ...addDirFiles(dirs.gatherers, [
           'csp-meta',
-          'redirect'
-        ].map(prefixDir(dirs.gatherers)),
-        ...[
+          'generator-meta',
+          'redirect',
+          'request-headers',
+        ]),
+        ...addDirFiles(dirs.lighthouseGatherers, [
             'dobetterweb/anchors-with-no-rel-noopener',
             'dobetterweb/password-inputs-with-prevented-paste',
-        ].map(prefixDir(dirs.lighthouseGatherers))
+        ])
     ]
   }],
 
   // Add custom audit to the list of audits 'lighthouse:default' will run.
   audits: [
-     ...[
+     ...addDirFiles(dirs.audits, [
         'csp',
         'csp-meta',
-        'xss-protection-header',
         'cookie-httponly',
         'cookie-secure',
+        'generator-meta',
         'redirect',
-        'x-generator-header',
         'x-frame-options-header',
-    ].map(prefixDir(dirs.audits)),
-    ...[
-      'is-on-https',
+        'x-generator-header',
+        'xss-protection-header',
+    ]),
+    ...addDirFiles(dirs.lighthouseAudits, [
       'dobetterweb/external-anchors-use-rel-noopener',
-      'dobetterweb/password-inputs-can-be-pasted-into'
-    ].map(prefixDir(dirs.lighthouseAudits))
+      'dobetterweb/password-inputs-can-be-pasted-into',
+      'is-on-https',
+    ])
   ],
 
   // Create a new 'Page Security' section in the default report for our results.
@@ -59,6 +61,7 @@ module.exports = {
         {id: 'is-on-https', weight: 1},
         {id: 'external-anchors-use-rel-noopener', weight: 0},
         {id: 'x-generator-header', weight:1},
+        {id: 'generator-meta', weight: 1},
         {id: 'x-frame-options-header', weight: 1},
         {id: 'password-inputs-can-be-pasted-into', weight: 1}
       ]

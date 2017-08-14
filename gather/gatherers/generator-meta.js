@@ -2,7 +2,7 @@
 
 const Gatherer = require('lighthouse').Gatherer
 
-class MetaGenerator extends Gatherer {
+class GeneratorMeta extends Gatherer {
 
   /**
    * @param {{driver: !Object}} options Run options
@@ -16,4 +16,4 @@ class MetaGenerator extends Gatherer {
   }
 }
 
-module.exports = MetaGenerator;
+module.exports = GeneratorMeta;
