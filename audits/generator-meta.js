@@ -6,7 +6,7 @@ class MetaGeneratorAudit extends Audit {
   static get meta() {
     return {
       category: 'PageSecurity',
-      name: 'meta-generator',
+      name: 'generator-meta',
       description: 'Page has no `<meta name="generator">`',
       failureDescription: 'Page has `<meta name="generator">` set to',
       helpText: 'Make sure to remove the generator meta tag to prevent ' +
@@ -14,12 +14,12 @@ class MetaGeneratorAudit extends Audit {
           'in unpatched versions as well as specific misconfigurations in the ' +
           'framework and known file structures. ' +
           '[Learn more](https://goo.gl/XhsuhC).',
-      requiredArtifacts: ['MetaGenerator']
+      requiredArtifacts: ['GeneratorMeta']
     };
   }
 
   static audit(artifacts) {
-    const generatorValue = artifacts.MetaGenerator;
+    const generatorValue = artifacts.GeneratorMeta;
     const hasNoGenerator = (typeof generatorValue !== 'string');
 
     if (hasNoGenerator) {

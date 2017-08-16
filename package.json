@@ -2,6 +2,7 @@
   "name": "lighthouse-security",
   "description": "Runs the default Google Lighthouse tests with additional security tests",
   "version": "0.4.0",
+  "license": "Apache-2.0",
   "engineStrict": true,
   "engines": {
     "node": ">=8.3.0"
@@ -13,6 +14,7 @@
     "lint": "eslint ."
   },
   "author": "Marko Malis",
+  "homepage": "https://github.com/voorhoede/lighthouse-security#readme",
   "keywords": [
     "lighthouse",
     "websec",
