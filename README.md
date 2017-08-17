@@ -20,6 +20,12 @@ the [default Lighthouse CLI options](https://github.com/GoogleChrome/lighthouse#
 lighthouse-security <url> [options]
 ```
 
+To run security audits only, use the `--security` flag:
+
+```sh
+lighthouse-security <url> --security [options]
+```
+
 ## Use in code
 
 The extension can also be used within your code. A short example is given below.

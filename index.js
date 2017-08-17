@@ -3,7 +3,10 @@ const chromeLauncher = require('lighthouse/chrome-launcher')
 const pageSecurityConfig = require('./config')
 
 async function run(url, flags = {}) {
-    const config = Object.assign({ extends: 'lighthouse:default' }, pageSecurityConfig)
+    const config = flags.security
+        ? pageSecurityConfig
+        : Object.assign({ extends: 'lighthouse:default' }, pageSecurityConfig);
+
     const chrome = await chromeLauncher.launch()
     flags.port = chrome.port
     const results = await lighthouse(url, flags, config)
