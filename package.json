@@ -5,13 +5,14 @@
   "license": "Apache-2.0",
   "engineStrict": true,
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=6"
   },
   "bin": {
     "lighthouse-security": "./bin/index.js"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "npm run lint"
   },
   "author": "Marko Malis",
   "homepage": "https://github.com/voorhoede/lighthouse-security#readme",

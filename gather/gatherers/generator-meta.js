@@ -1,9 +1,8 @@
 'use strict';
 
-const Gatherer = require('lighthouse').Gatherer
+const Gatherer = require('lighthouse').Gatherer;
 
 class GeneratorMeta extends Gatherer {
-
   /**
    * @param {{driver: !Object}} options Run options
    * @return {!Promise<?string>} The value of the generator meta's content attribute, or null

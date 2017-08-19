@@ -1,7 +1,6 @@
+'use strict';
+
 const Audit = require('lighthouse').Audit;
-
-const MAX_SEARCHABLE_TIME = 4000;
-
 
 class HttpRedirectAudit extends Audit {
   static get meta() {
@@ -13,13 +12,13 @@ class HttpRedirectAudit extends Audit {
 
       // The name of the custom gatherer class that provides input to this audit.
       requiredArtifacts: ['HttpRedirect']
-    }
+    };
   }
 
   static audit(artifacts) {
-    const redirectResponse = artifacts.HttpRedirect
+    const redirectResponse = artifacts.HttpRedirect;
 
-    const isRedirect = redirectResponse.statusCode >= 300 && redirectResponse.statusCode < 400
+    const isRedirect = redirectResponse.statusCode >= 300 && redirectResponse.statusCode < 400;
 
     return {
       rawValue: isRedirect.toString(),
@@ -28,4 +27,4 @@ class HttpRedirectAudit extends Audit {
   }
 }
 
-module.exports = HttpRedirectAudit
+module.exports = HttpRedirectAudit;

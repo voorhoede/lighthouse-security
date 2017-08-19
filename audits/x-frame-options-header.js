@@ -3,14 +3,14 @@
 const Audit = require('lighthouse').Audit;
 
 const isValidOption = value => {
-    if (!(typeof value === 'string')) {
-        return false;
-    }
-    value = value.toUpperCase();
-    return value === 'DENY' || 
-           value === 'SAMEORIGIN' || 
+  if (!(typeof value === 'string')) {
+    return false;
+  }
+  value = value.toUpperCase();
+  return value === 'DENY' ||
+           value === 'SAMEORIGIN' ||
            value.startsWith('ALLOW-FROM ');
-}
+};
 
 class FrameOptionsHeaderAudit extends Audit {
   static get meta() {
@@ -29,27 +29,27 @@ class FrameOptionsHeaderAudit extends Audit {
 
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
-    const headerValue = headers['x-frame-options']
+    const headerValue = headers['x-frame-options'];
     const hasValue = (typeof headerValue === 'string');
 
     if (!hasValue) {
-        return { 
-            debugString: 'X-Frame-Options header is not set.',
-            rawValue: false 
-        };
+      return {
+        debugString: 'X-Frame-Options header is not set.',
+        rawValue: false
+      };
     }
 
     if (!isValidOption(headerValue)) {
-        return {
-            debugString: `${headerValue} is not a valid X-Frame-Options value.`,
-            rawValue: false
-        }
+      return {
+        debugString: `${headerValue} is not a valid X-Frame-Options value.`,
+        rawValue: false
+      };
     }
 
     return {
-        displayValue: headerValue,
-        rawValue: true
-    }
+      displayValue: headerValue,
+      rawValue: true
+    };
   }
 }
 

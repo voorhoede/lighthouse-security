@@ -1,6 +1,6 @@
-const Audit = require('lighthouse').Audit;
+'use strict';
 
-const MAX_SEARCHABLE_TIME = 4000;
+const Audit = require('lighthouse').Audit;
 
 
 class XssAudit extends Audit {
@@ -19,9 +19,9 @@ class XssAudit extends Audit {
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
 
-    const xss_header = headers['x-xss-protection']
+    const xssHeader = headers['x-xss-protection'];
 
-    const hasCspHeader = !!xss_header
+    const hasCspHeader = !!xssHeader;
 
     return {
       rawValue: hasCspHeader.toString(),

@@ -1,7 +1,6 @@
+'use strict';
+
 const Audit = require('lighthouse').Audit;
-
-const MAX_SEARCHABLE_TIME = 4000;
-
 
 class SecureCookiesAudit extends Audit {
   static get meta() {
@@ -17,16 +16,16 @@ class SecureCookiesAudit extends Audit {
   }
 
   static audit(artifacts) {
-      const headers = artifacts.RequestHeaders
-      const setCookieHeader = headers['set-cookie']
+    const headers = artifacts.RequestHeaders;
+    const setCookieHeader = headers['set-cookie'];
 
-      const httpOnly = /secure/.test(setCookieHeader) || !setCookieHeader
+    const httpOnly = /secure/.test(setCookieHeader) || !setCookieHeader;
 
-      return {
-        rawValue: httpOnly.toString(),
-        score: httpOnly
-      };
+    return {
+      rawValue: httpOnly.toString(),
+      score: httpOnly
+    };
   }
 }
 
-module.exports = SecureCookiesAudit
+module.exports = SecureCookiesAudit;

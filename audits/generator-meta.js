@@ -23,11 +23,11 @@ class MetaGeneratorAudit extends Audit {
     const hasNoGenerator = (typeof generatorValue !== 'string');
 
     if (hasNoGenerator) {
-        return { 
-            rawValue: true 
-        };
+      return {
+        rawValue: true
+      };
     }
-    
+
     return {
       displayValue: generatorValue,
       rawValue: hasNoGenerator

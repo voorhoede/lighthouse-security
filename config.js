@@ -1,10 +1,11 @@
 'use strict';
 const path = require('path');
+const lighthouseDir = path.dirname(require.resolve('lighthouse'));
 const dirs = {
-    audits: path.join(__dirname, 'audits'),
-    gatherers: path.join(__dirname, 'gather', 'gatherers'),
-    lighthouseAudits: path.join(path.dirname(require.resolve('lighthouse')), 'audits'),
-    lighthouseGatherers: path.join(path.dirname(require.resolve('lighthouse')), 'gather', 'gatherers'),
+  audits: path.join(__dirname, 'audits'),
+  gatherers: path.join(__dirname, 'gather', 'gatherers'),
+  lighthouseAudits: path.join(lighthouseDir, 'audits'),
+  lighthouseGatherers: path.join(lighthouseDir, 'gather', 'gatherers'),
 };
 const addDirFiles = (dirname, basenames) => basenames.map(basename => path.join(dirname, basename));
 
@@ -13,31 +14,31 @@ module.exports = {
   passes: [{
     passName: 'defaultPass',
     gatherers: [
-        ...addDirFiles(dirs.gatherers, [
-          'csp-meta',
-          'generator-meta',
-          'redirect',
-          'request-headers',
-        ]),
-        ...addDirFiles(dirs.lighthouseGatherers, [
-            'dobetterweb/anchors-with-no-rel-noopener',
-            'dobetterweb/password-inputs-with-prevented-paste',
-        ])
+      ...addDirFiles(dirs.gatherers, [
+        'csp-meta',
+        'generator-meta',
+        'redirect',
+        'request-headers',
+      ]),
+      ...addDirFiles(dirs.lighthouseGatherers, [
+        'dobetterweb/anchors-with-no-rel-noopener',
+        'dobetterweb/password-inputs-with-prevented-paste',
+      ])
     ]
   }],
 
   // Add custom audit to the list of audits 'lighthouse:default' will run.
   audits: [
-     ...addDirFiles(dirs.audits, [
-        'csp',
-        'csp-meta',
-        'cookie-httponly',
-        'cookie-secure',
-        'generator-meta',
-        'redirect',
-        'x-frame-options-header',
-        'x-generator-header',
-        'xss-protection-header',
+    ...addDirFiles(dirs.audits, [
+      'csp',
+      'csp-meta',
+      'cookie-httponly',
+      'cookie-secure',
+      'generator-meta',
+      'redirect',
+      'x-frame-options-header',
+      'x-generator-header',
+      'xss-protection-header',
     ]),
     ...addDirFiles(dirs.lighthouseAudits, [
       'dobetterweb/external-anchors-use-rel-noopener',
@@ -60,7 +61,7 @@ module.exports = {
         {id: 'http-redirect-audit', weight: 1},
         {id: 'is-on-https', weight: 1},
         {id: 'external-anchors-use-rel-noopener', weight: 0},
-        {id: 'x-generator-header', weight:1},
+        {id: 'x-generator-header', weight: 1},
         {id: 'generator-meta', weight: 1},
         {id: 'x-frame-options-header', weight: 1},
         {id: 'password-inputs-can-be-pasted-into', weight: 1}

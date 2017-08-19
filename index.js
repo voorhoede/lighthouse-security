@@ -1,18 +1,19 @@
-const lighthouse = require('lighthouse')
-const chromeLauncher = require('lighthouse/chrome-launcher')
-const pageSecurityConfig = require('./config')
+'use strict';
 
-async function run(url, flags = {}) {
-    const config = flags.security
-        ? pageSecurityConfig
-        : Object.assign({ extends: 'lighthouse:default' }, pageSecurityConfig);
+const lighthouse = require('lighthouse');
+const chromeLauncher = require('lighthouse/chrome-launcher');
+const pageSecurityConfig = require('./config');
 
-    const chrome = await chromeLauncher.launch()
-    flags.port = chrome.port
-    const results = await lighthouse(url, flags, config)
-    const stopped = await chrome.kill()
+function run(url, flags = {}) {
+  const config = flags.security
+    ? pageSecurityConfig
+    : Object.assign({extends: 'lighthouse:default'}, pageSecurityConfig);
 
-    return results
+  return chromeLauncher.launch().then(chrome => {
+    const resultsPromise = lighthouse(url, Object.assign(flags, {port: chrome.port}), config);
+    resultsPromise.then(() => chrome.kill());
+    return resultsPromise;
+  });
 }
 
-module.exports = run
+module.exports = run;

@@ -1,7 +1,6 @@
+'use strict';
+
 const Audit = require('lighthouse').Audit;
-
-const MAX_SEARCHABLE_TIME = 4000;
-
 
 class CspAudit extends Audit {
   static get meta() {
@@ -17,16 +16,16 @@ class CspAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const cspMetaTags = artifacts.CspMetaGatherer
-    const headers = artifacts.RequestHeaders
+    const cspMetaTags = artifacts.CspMetaGatherer;
+    const headers = artifacts.RequestHeaders;
 
-    const hasCspMetaTags = cspMetaTags.length > 0
+    const hasCspMetaTags = cspMetaTags.length > 0;
 
-    const cspHeader = headers['content-security-policy']
-    const xCspHeader = headers['x-content-security-policy']
-    const hasCspHeader = !!(cspHeader || xCspHeader)
+    const cspHeader = headers['content-security-policy'];
+    const xCspHeader = headers['x-content-security-policy'];
+    const hasCspHeader = !!(cspHeader || xCspHeader);
 
-    const csp = hasCspMetaTags || hasCspHeader
+    const csp = hasCspMetaTags || hasCspHeader;
 
     return {
       rawValue: csp.toString(),

@@ -20,15 +20,15 @@ class XgeneratorHeaderAudit extends Audit {
 
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
-    const headerValue = headers['x-generator']
+    const headerValue = headers['x-generator'];
     const hasNoGenerator = (typeof headerValue !== 'string');
 
     if (hasNoGenerator) {
-        return { 
-            rawValue: true 
-        };
+      return {
+        rawValue: true
+      };
     }
-    
+
     return {
       displayValue: headerValue,
       rawValue: hasNoGenerator
