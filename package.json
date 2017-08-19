@@ -12,6 +12,7 @@
   },
   "scripts": {
     "coverage": "nyc --reporter=html npm run unit",
+    "coverage-report": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint .",
     "test": "npm run lint && npm run unit",
     "unit": "mocha --reporter dot $(find test -name '*-test.js') --timeout 60000;"
@@ -30,6 +31,7 @@
     "request-promise": "^4.2.1"
   },
   "devDependencies": {
+    "coveralls": "2.13.1",
     "eslint": "^4.4.1",
     "eslint-config-google": "^0.9.1",
     "mocha": "3.5.0",

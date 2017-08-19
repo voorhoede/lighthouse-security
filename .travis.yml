@@ -17,5 +17,9 @@ before_script:
   - sleep 3 # wait for xvfb to boot
 script:
   - yarn test
+after_success:
+  - yarn coverage-report
 addons:
   chrome: stable
+notifications:
+  email: false
