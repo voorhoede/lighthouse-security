@@ -1,4 +1,4 @@
-# [Lighthouse](https://github.com/GoogleChrome/lighthouse) Security [![npm lighthouse-security package](https://img.shields.io/npm/v/lighthouse-security.svg)](https://npmjs.org/package/lighthouse-security)
+# [Lighthouse](https://github.com/GoogleChrome/lighthouse) Security [![Linux Build Status](https://travis-ci.org/voorhoede/lighthouse-security.svg?branch=master)](https://travis-ci.org/voorhoede/lighthouse-security) [![npm lighthouse-security package](https://img.shields.io/npm/v/lighthouse-security.svg)](https://npmjs.org/package/lighthouse-security)
 
 **Runs the default Google Lighthouse tests with additional security tests.**
 
@@ -54,7 +54,7 @@ const config = Object.assign({},
 )
 
 // run lighthouse as usual:
-async function run(url, flags = {}) {  
+async function run(url, flags = {}) {
     const chrome = await chromeLauncher.launch()
     flags.port = chrome.port
     const results = await lighthouse(url, flags, config)
