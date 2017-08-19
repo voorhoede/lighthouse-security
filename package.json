@@ -12,7 +12,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run lint"
+    "test": "npm run lint && npm run unit",
+    "unit": "mocha --reporter dot $(find test -name '*-test.js') --timeout 60000;"
   },
   "author": "Marko Malis",
   "homepage": "https://github.com/voorhoede/lighthouse-security#readme",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "eslint": "^4.4.1",
-    "eslint-config-google": "^0.9.1"
+    "eslint-config-google": "^0.9.1",
+    "mocha": "3.5.0"
   }
 }
