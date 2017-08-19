@@ -2,8 +2,8 @@
 
 **Runs the default Google Lighthouse tests with additional security tests.**
 
-<img width="100%" alt="Lighthouse Security metrics" src="docs/metrics.png">
-<img width="100%" alt="Lighthouse Security audits" src="docs/audits.png">
+<img width="100%" alt="Lighthouse Security metrics" src="https://github.com/voorhoede/lighthouse-security/raw/master/docs/metrics.png">
+<img width="100%" alt="Lighthouse Security audits" src="https://github.com/voorhoede/lighthouse-security/raw/master/docs/audits.png">
 
 ## Installation
 
