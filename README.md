@@ -62,3 +62,14 @@ async function run(url, flags = {}) {
     return results
 }
 ```
+
+## Contributing
+
+Contributions are always welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for [guidelines](CONTRIBUTING.md#guidelines) and [development scripts](CONTRIBUTING.md#scripts).
+
+
+## License
+
+[Apache 2.0 Licensed](LICENSE) by [De Voorhoede](https://www.voorhoede.nl/)
+
+[↑ back to top](#readme)
