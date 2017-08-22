@@ -19,11 +19,11 @@ class CookieHttpOnlyAudit extends Audit {
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
     const setCookieHeader = headers['set-cookie'];
-    const httpOnly = /HttpOnly/.test(setCookieHeader) || !setCookieHeader;
+    const isHttpOnly = /HttpOnly/.test(setCookieHeader) || !setCookieHeader;
 
     return {
-      rawValue: httpOnly.toString(),
-      score: httpOnly
+      rawValue: isHttpOnly,
+      score: isHttpOnly
     };
   }
 }

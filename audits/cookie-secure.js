@@ -9,8 +9,6 @@ class SecureCookiesAudit extends Audit {
       name: 'cookie-secure-audit',
       description: 'Secure cookies used',
       helpText: 'For more information visit https://www.owasp.org/index.php/SecureFlag',
-
-      // The name of the custom gatherer class that provides input to this audit.
       requiredArtifacts: ['RequestHeaders']
     };
   }
@@ -18,12 +16,11 @@ class SecureCookiesAudit extends Audit {
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
     const setCookieHeader = headers['set-cookie'];
-
-    const httpOnly = /secure/.test(setCookieHeader) || !setCookieHeader;
+    const isSecure = /Secure/.test(setCookieHeader) || !setCookieHeader;
 
     return {
-      rawValue: httpOnly.toString(),
-      score: httpOnly
+      rawValue: isSecure,
+      score: isSecure
     };
   }
 }

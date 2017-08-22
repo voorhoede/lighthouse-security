@@ -6,9 +6,45 @@ const assert = require('assert');
 /* eslint-env mocha */
 
 describe('Security: CSP audit', () => {
-  xit('fails', () => {
+  it('fails if no CSP headers and CSP meta tag is present', () => {
     return assert.equal(Audit.audit({
-      // set artifact values
+      CspMetaGatherer: [],
+      RequestHeaders: {
+        'content-security-policy': null,
+        'x-content-security-policy': null
+      }
+    }).rawValue, false);
+  });
+
+  it('passes if CSP meta tag is present', () => {
+    return assert.equal(Audit.audit({
+      CspMetaGatherer: [
+        'default-src https:',
+      ],
+      RequestHeaders: {
+        'content-security-policy': null,
+        'x-content-security-policy': null
+      }
+    }).rawValue, true);
+  });
+
+  it('passes if Content-Security-Policy header is set', () => {
+    return assert.equal(Audit.audit({
+      CspMetaGatherer: [],
+      RequestHeaders: {
+        'content-security-policy': 'default-src https:',
+        'x-content-security-policy': null
+      }
+    }).rawValue, true);
+  });
+
+  it('passes if X-Content-Security-Policy header is set', () => {
+    return assert.equal(Audit.audit({
+      CspMetaGatherer: [],
+      RequestHeaders: {
+        'content-security-policy': null,
+        'x-content-security-policy': 'default-src https:'
+      }
     }).rawValue, true);
   });
 });

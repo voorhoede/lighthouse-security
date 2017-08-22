@@ -1,23 +1,23 @@
 'use strict';
 
-const Audit = require('../../audits/cookie-httponly.js');
+const Audit = require('../../audits/cookie-secure.js');
 const assert = require('assert');
 
 /* eslint-env mocha */
 
-describe('Security: Cookie HttpOnly audit', () => {
-  it('fails if Set-Cookie is used without HttpOnly flag', () => {
+describe('Security: Cookie Secure audit', () => {
+  it('fails if Set-Cookie is used without Secure flag', () => {
     return assert.equal(Audit.audit({
       RequestHeaders: {
-        'set-cookie': 'sessionid=38afes7a8; Path=/'
+        'set-cookie': 'id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT'
       }
     }).rawValue, false);
   });
 
-  it('passes if Set-Cookie contains HttpOnly flag', () => {
+  it('passes if Set-Cookie contains Secure flag', () => {
     return assert.equal(Audit.audit({
       RequestHeaders: {
-        'set-cookie': 'sessionid=38afes7a8; HttpOnly; Path=/'
+        'set-cookie': 'id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly'
       }
     }).rawValue, true);
   });

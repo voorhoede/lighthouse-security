@@ -5,10 +5,18 @@ const assert = require('assert');
 
 /* eslint-env mocha */
 
-describe('Security: CSP Meta audit', () => {
-  xit('fails', () => {
+describe('Security: `<meta name="Content-Security-Policy">` audit', () => {
+  it('fails if no CSP meta tags are present', () => {
     return assert.equal(Audit.audit({
-      // set artifact values
+      CspMetaGatherer: []
+    }).rawValue, false);
+  });
+
+  it('passes if a CSP meta tag is present', () => {
+    return assert.equal(Audit.audit({
+      CspMetaGatherer: [
+        'default-src https:',
+      ]
     }).rawValue, true);
   });
 });

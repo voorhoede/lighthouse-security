@@ -1,6 +1,7 @@
 'use strict';
 
 const Audit = require('lighthouse').Audit;
+const validUrl = require('valid-url');
 
 const isValidOption = value => {
   if (!(typeof value === 'string')) {
@@ -8,8 +9,8 @@ const isValidOption = value => {
   }
   value = value.toUpperCase();
   return value === 'DENY' ||
-           value === 'SAMEORIGIN' ||
-           value.startsWith('ALLOW-FROM ');
+         value === 'SAMEORIGIN' ||
+         value.startsWith('ALLOW-FROM ') && validUrl.isUri(value.substr('ALLOW-FROM '.length));
 };
 
 class FrameOptionsHeaderAudit extends Audit {

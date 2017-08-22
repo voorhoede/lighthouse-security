@@ -10,22 +10,18 @@ class XssAudit extends Audit {
       name: 'xss-headers-audit',
       description: 'X-XSS-Protection header is set',
       helpText: 'For more information visit https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection',
-
-      // The name of the custom gatherer class that provides input to this audit.
       requiredArtifacts: ['RequestHeaders']
     };
   }
 
   static audit(artifacts) {
     const headers = artifacts.RequestHeaders;
-
     const xssHeader = headers['x-xss-protection'];
-
-    const hasCspHeader = !!xssHeader;
+    const hasXssHeader = !!xssHeader;
 
     return {
-      rawValue: hasCspHeader.toString(),
-      score: hasCspHeader
+      rawValue: hasXssHeader,
+      score: hasXssHeader
     };
   }
 }

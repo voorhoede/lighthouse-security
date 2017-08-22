@@ -9,8 +9,6 @@ class CspAudit extends Audit {
       name: 'csp-audit',
       description: 'CSP meta tag or CSP header is set',
       helpText: 'For more information visit https://developers.google.com/web/fundamentals/security/csp/',
-
-      // The name of the custom gatherer class that provides input to this audit.
       requiredArtifacts: ['CspMetaGatherer', 'RequestHeaders']
     };
   }
@@ -18,18 +16,15 @@ class CspAudit extends Audit {
   static audit(artifacts) {
     const cspMetaTags = artifacts.CspMetaGatherer;
     const headers = artifacts.RequestHeaders;
-
     const hasCspMetaTags = cspMetaTags.length > 0;
-
     const cspHeader = headers['content-security-policy'];
     const xCspHeader = headers['x-content-security-policy'];
     const hasCspHeader = !!(cspHeader || xCspHeader);
-
-    const csp = hasCspMetaTags || hasCspHeader;
+    const hasCsp = hasCspMetaTags || hasCspHeader;
 
     return {
-      rawValue: csp.toString(),
-      score: csp
+      rawValue: hasCsp,
+      score: hasCsp
     };
   }
 }

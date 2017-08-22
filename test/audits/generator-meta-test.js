@@ -12,7 +12,7 @@ describe('Security: `<meta name="generator">` audit', () => {
     }).rawValue, false);
   });
 
-  it('fails when HTML contains a generator meta tag', () => {
+  it('displays value of the generator meta tag', () => {
     return assert.equal(Audit.audit({
       GeneratorMeta: 'Wordpress 4.8.1'
     }).displayValue, 'Wordpress 4.8.1');
