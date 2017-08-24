@@ -30,6 +30,14 @@ describe('Security: X-Frame-Options header audit', () => {
     }).rawValue, false);
   });
 
+  it('header value check is case-insenstive', () => {
+    return assert.equal(Audit.audit({
+      RequestHeaders: {
+        'x-frame-options': 'sameorigin',
+      }
+    }).rawValue, true);
+  });
+
   it('passes if X-Frame-Options header is set to `DENY`', () => {
     return assert.equal(Audit.audit({
       RequestHeaders: {

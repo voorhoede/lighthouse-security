@@ -1,14 +1,16 @@
 'use strict';
-
 const Audit = require('lighthouse').Audit;
 
 class SecureCookiesAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
-      name: 'cookie-secure-audit',
-      description: 'Secure cookies used',
-      helpText: 'For more information visit https://www.owasp.org/index.php/SecureFlag',
+      category: 'Security',
+      name: 'cookie-secure',
+      description: 'Cookies are Secure',
+      failureDescription: 'Cookies are not Secure',
+      helpText: 'Using the Secure flag ensures a cookie can only be transmitted ' +
+                'over an encrypted connection and not over the insecure HTTP. ' +
+                '[Learn more](https://www.owasp.org/index.php/SecureFlag)',
       requiredArtifacts: ['RequestHeaders']
     };
   }
@@ -19,8 +21,7 @@ class SecureCookiesAudit extends Audit {
     const isSecure = /Secure/.test(setCookieHeader) || !setCookieHeader;
 
     return {
-      rawValue: isSecure,
-      score: isSecure
+      rawValue: isSecure
     };
   }
 }

@@ -17,12 +17,13 @@ module.exports = {
       ...addDirFiles(dirs.gatherers, [
         'csp-meta',
         'generator-meta',
-        'redirect',
         'request-headers',
       ]),
       ...addDirFiles(dirs.lighthouseGatherers, [
         'dobetterweb/anchors-with-no-rel-noopener',
         'dobetterweb/password-inputs-with-prevented-paste',
+        'http-redirect',
+        'url',
       ])
     ]
   }],
@@ -31,11 +32,9 @@ module.exports = {
   audits: [
     ...addDirFiles(dirs.audits, [
       'csp',
-      'csp-meta',
       'cookie-httponly',
       'cookie-secure',
       'generator-meta',
-      'redirect',
       'server-header',
       'x-frame-options-header',
       'x-generator-header',
@@ -45,28 +44,52 @@ module.exports = {
       'dobetterweb/external-anchors-use-rel-noopener',
       'dobetterweb/password-inputs-can-be-pasted-into',
       'is-on-https',
+      'redirects-http',
     ])
   ],
 
-  // Create a new 'Page Security' section in the default report for our results.
+  groups: {
+    'secure-connection': {
+      title: 'Secure connection',
+      description: ''
+    },
+    'secure-cookies': {
+      title: 'Secure cookies',
+      description: ''
+    },
+    'secure-content': {
+      title: 'Secure content',
+      description: ''
+    },
+    'secure-ux': {
+      title: 'Secure UX',
+      description: ''
+    },
+    'fingerprinting': {
+      title: 'Fingerprinting',
+      description: ''
+    },
+  },
+
+  // Add custom sections to the default report.
   categories: {
-    pageSecurity: {
-      name: 'Page Security',
+    security: {
+      name: 'Security',
       description: 'Scores for some of the best practices for web security',
       audits: [
         // When we add more custom audits, `weight` controls how they're averaged together.
-        {id: 'csp-audit', weight: 1},
-        {id: 'xss-headers-audit', weight: 1},
-        {id: 'cookie-httpOnly-audit', weight: 1},
-        {id: 'cookie-secure-audit', weight: 1},
-        {id: 'http-redirect-audit', weight: 1},
-        {id: 'is-on-https', weight: 1},
-        {id: 'external-anchors-use-rel-noopener', weight: 0},
-        {id: 'server-header', weight: 1},
-        {id: 'x-generator-header', weight: 1},
-        {id: 'generator-meta', weight: 1},
-        {id: 'x-frame-options-header', weight: 1},
-        {id: 'password-inputs-can-be-pasted-into', weight: 1}
+        {group: 'secure-connection', id: 'is-on-https', weight: 1},
+        {group: 'secure-connection', id: 'redirects-http', weight: 1},
+        {group: 'secure-cookies', id: 'cookie-secure', weight: 1},
+        {group: 'secure-cookies', id: 'cookie-httponly', weight: 1},
+        {group: 'secure-content', id: 'csp', weight: 1},
+        {group: 'secure-content', id: 'xss-headers', weight: 1},
+        {group: 'secure-ux', id: 'x-frame-options-header', weight: 1},
+        {group: 'secure-ux', id: 'external-anchors-use-rel-noopener', weight: 1},
+        {group: 'secure-ux', id: 'password-inputs-can-be-pasted-into', weight: 1},
+        {group: 'fingerprinting', id: 'server-header', weight: 0},
+        {group: 'fingerprinting', id: 'x-generator-header', weight: 0},
+        {group: 'fingerprinting', id: 'generator-meta', weight: 0},
       ]
     }
   }

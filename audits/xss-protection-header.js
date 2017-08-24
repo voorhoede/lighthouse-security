@@ -1,15 +1,16 @@
 'use strict';
-
 const Audit = require('lighthouse').Audit;
-
 
 class XssAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
-      name: 'xss-headers-audit',
+      category: 'Security',
+      name: 'xss-headers',
       description: 'X-XSS-Protection header is set',
-      helpText: 'For more information visit https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection',
+      failureDescription: 'X-XSS-Protection header is missing',
+      helpText: 'The HTTP `X-XSS-Protection` response header stops pages from loading ' +
+                'when they detect reflected cross-site scripting (XSS) attacks. ' +
+                '[Learn more](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection).',
       requiredArtifacts: ['RequestHeaders']
     };
   }
@@ -20,8 +21,7 @@ class XssAudit extends Audit {
     const hasXssHeader = !!xssHeader;
 
     return {
-      rawValue: hasXssHeader,
-      score: hasXssHeader
+      rawValue: hasXssHeader
     };
   }
 }

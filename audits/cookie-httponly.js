@@ -1,12 +1,11 @@
 'use strict';
-
 const Audit = require('lighthouse').Audit;
 
 class CookieHttpOnlyAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
-      name: 'cookie-httpOnly-audit',
+      category: 'Security',
+      name: 'cookie-httponly',
       description: 'Cookies are HttpOnly',
       failureDescription: 'Cookies are not HttpOnly',
       helpText: 'Using the HttpOnly flag when generating a cookie helps mitigate ' +
@@ -22,8 +21,7 @@ class CookieHttpOnlyAudit extends Audit {
     const isHttpOnly = /HttpOnly/.test(setCookieHeader) || !setCookieHeader;
 
     return {
-      rawValue: isHttpOnly,
-      score: isHttpOnly
+      rawValue: isHttpOnly
     };
   }
 }

@@ -1,11 +1,10 @@
 'use strict';
-
 const Audit = require('lighthouse').Audit;
 
 class MetaGeneratorAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
+      category: 'Security',
       name: 'generator-meta',
       description: 'Page has no `<meta name="generator">`',
       failureDescription: 'Page has `<meta name="generator">` set to',

@@ -1,14 +1,16 @@
 'use strict';
-
 const Audit = require('lighthouse').Audit;
 
 class CspAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
-      name: 'csp-audit',
-      description: 'CSP meta tag or CSP header is set',
-      helpText: 'For more information visit https://developers.google.com/web/fundamentals/security/csp/',
+      category: 'Security',
+      name: 'csp',
+      description: 'Has a Content Security Policy (CSP)',
+      failureDescription: 'Is missing Content Security Policy (CSP)',
+      helpText: 'A Content Security Policy helps prevent cross-site scripting (XSS), ' +
+                'clickjacking and other code injection by whitelisting trusted resources. ' +
+                '[Learn more](https://developers.google.com/web/fundamentals/security/csp/)',
       requiredArtifacts: ['CspMetaGatherer', 'RequestHeaders']
     };
   }
@@ -23,8 +25,7 @@ class CspAudit extends Audit {
     const hasCsp = hasCspMetaTags || hasCspHeader;
 
     return {
-      rawValue: hasCsp,
-      score: hasCsp
+      rawValue: hasCsp
     };
   }
 }

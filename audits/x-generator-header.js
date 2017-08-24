@@ -5,7 +5,7 @@ const Audit = require('lighthouse').Audit;
 class XgeneratorHeaderAudit extends Audit {
   static get meta() {
     return {
-      category: 'PageSecurity',
+      category: 'Security',
       name: 'x-generator-header',
       description: 'Page has no `X-Generator` header',
       failureDescription: 'Page has `X-Generator` header set to',
