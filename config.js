@@ -37,6 +37,7 @@ module.exports = {
       'cookie-samesite',
       'generator-meta',
       'server-header',
+      'strict-transport-security',
       'x-frame-options-header',
       'x-generator-header',
       'xss-protection-header',
@@ -81,6 +82,7 @@ module.exports = {
         // When we add more custom audits, `weight` controls how they're averaged together.
         {group: 'secure-connection', id: 'is-on-https', weight: 1},
         {group: 'secure-connection', id: 'redirects-http', weight: 1},
+        {group: 'secure-connection', id: 'strict-transport-security', weight: 1},
         {group: 'secure-cookies', id: 'cookie-secure', weight: 1},
         {group: 'secure-cookies', id: 'cookie-httponly', weight: 1},
         {group: 'secure-cookies', id: 'cookie-samesite', weight: 1},
