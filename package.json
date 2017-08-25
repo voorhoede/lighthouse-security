@@ -26,14 +26,14 @@
     "websecurity"
   ],
   "dependencies": {
-    "lighthouse": "^2.3.0",
+    "lighthouse": "2.4.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "valid-url": "1.0.9"
   },
   "devDependencies": {
     "coveralls": "2.13.1",
-    "eslint": "^4.4.1",
+    "eslint": "4.5.0",
     "eslint-config-google": "^0.9.1",
     "mocha": "3.5.0",
     "nyc": "11.1.0"
