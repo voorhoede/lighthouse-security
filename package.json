@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "lighthouse": "2.4.0",
+    "lighthouse-logger": "1.0.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "valid-url": "1.0.9"
