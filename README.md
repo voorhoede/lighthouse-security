@@ -1,5 +1,7 @@
 # [Lighthouse](https://github.com/GoogleChrome/lighthouse) Security [![Linux Build Status](https://travis-ci.org/voorhoede/lighthouse-security.svg?branch=master)](https://travis-ci.org/voorhoede/lighthouse-security) [![Coverage Status](https://coveralls.io/repos/github/voorhoede/lighthouse-security/badge.svg?branch=master)](https://coveralls.io/github/voorhoede/lighthouse-security?branch=master) [![npm lighthouse-security package](https://img.shields.io/npm/v/lighthouse-security.svg)](https://npmjs.org/package/lighthouse-security)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/voorhoede/lighthouse-security.svg)](https://greenkeeper.io/)
+
 **Runs the default Google Lighthouse tests with additional security tests.**
 
 <img width="100%" alt="Lighthouse Security metrics" src="https://github.com/voorhoede/lighthouse-security/raw/master/docs/metrics.png">
