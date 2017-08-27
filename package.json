@@ -15,7 +15,9 @@
     "coverage-report": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint .",
     "test": "npm run lint && npm run unit",
-    "unit": "mocha --reporter dot $(find test -name '*-test.js') --timeout 60000;"
+    "unit": "mocha --reporter dot $(find test -name '*-test.js') --timeout 60000;",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "De Voorhoede (https://www.voorhoede.nl)",
   "homepage": "https://github.com/voorhoede/lighthouse-security#readme",
@@ -29,7 +31,8 @@
     "lighthouse": "2.4.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "valid-url": "1.0.9"
+    "valid-url": "1.0.9",
+    "snyk": "^1.40.1"
   },
   "devDependencies": {
     "coveralls": "2.13.1",
@@ -37,5 +40,6 @@
     "eslint-config-google": "^0.9.1",
     "mocha": "3.5.0",
     "nyc": "11.1.0"
-  }
+  },
+  "snyk": true
 }
