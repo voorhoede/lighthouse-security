@@ -18,7 +18,7 @@ before_script:
 script:
   - yarn test
 after_success:
-  - yarn coverage-report
+  - yarn coverage && yarn coverage-report
 addons:
   chrome: stable
 notifications:
