@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: XSS-Protection header audit', () => {
   it('fails when no XSS-Protection header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-xss-protection': null
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: XSS-Protection header audit', () => {
 
   it('passes when no XSS-Protection header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-xss-protection': '1; mode=block'
       }
     }).rawValue, true);

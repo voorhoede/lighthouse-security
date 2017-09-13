@@ -13,12 +13,12 @@ class StrictTransportSecurityAudit extends Audit {
                 'to your server server via HTTPS, even when following an `http://` reference. ' +
                 'This defeats attacks such as SSL Stripping. ' +
                 '[Learn more](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Description).',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['strict-transport-security'];
+    const header = artifacts.ResponseHeaders['strict-transport-security'];
     const hasHeader = (typeof header === 'string');
     const params = parseHeader(header);
 

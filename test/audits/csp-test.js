@@ -9,7 +9,7 @@ describe('Security: CSP audit', () => {
   it('fails if no CSP headers and CSP meta tag is present', () => {
     return assert.equal(Audit.audit({
       CspMetaGatherer: [],
-      RequestHeaders: {
+      ResponseHeaders: {
         'content-security-policy': null,
         'x-content-security-policy': null
       }
@@ -21,7 +21,7 @@ describe('Security: CSP audit', () => {
       CspMetaGatherer: [
         'default-src https:',
       ],
-      RequestHeaders: {
+      ResponseHeaders: {
         'content-security-policy': null,
         'x-content-security-policy': null
       }
@@ -31,7 +31,7 @@ describe('Security: CSP audit', () => {
   it('passes if Content-Security-Policy header is set', () => {
     return assert.equal(Audit.audit({
       CspMetaGatherer: [],
-      RequestHeaders: {
+      ResponseHeaders: {
         'content-security-policy': 'default-src https:',
         'x-content-security-policy': null
       }
@@ -41,7 +41,7 @@ describe('Security: CSP audit', () => {
   it('passes if X-Content-Security-Policy header is set', () => {
     return assert.equal(Audit.audit({
       CspMetaGatherer: [],
-      RequestHeaders: {
+      ResponseHeaders: {
         'content-security-policy': null,
         'x-content-security-policy': 'default-src https:'
       }

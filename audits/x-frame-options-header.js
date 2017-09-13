@@ -31,12 +31,12 @@ class FrameOptionsHeaderAudit extends Audit {
           'against clickjacking attacks. It prevents your content ' +
           'from being loaded in a frame on an attacker\'s site. ' +
           '[Learn more](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['x-frame-options'];
+    const header = artifacts.ResponseHeaders['x-frame-options'];
     const hasHeader = (typeof header === 'string');
 
     if (!hasHeader) {

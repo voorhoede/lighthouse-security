@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: Cookie Secure audit', () => {
   it('fails if Set-Cookie is used without Secure flag', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': 'id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT'
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: Cookie Secure audit', () => {
 
   it('passes if Set-Cookie contains Secure flag', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': 'id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly'
       }
     }).rawValue, true);
@@ -24,7 +24,7 @@ describe('Security: Cookie Secure audit', () => {
 
   it('passes if no Set-Cookie header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': null
       }
     }).rawValue, true);

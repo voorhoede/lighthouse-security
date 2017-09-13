@@ -11,13 +11,13 @@ class CspAudit extends Audit {
       helpText: 'A Content Security Policy helps prevent cross-site scripting (XSS), ' +
                 'clickjacking and other code injection by whitelisting trusted resources. ' +
                 '[Learn more](https://developers.google.com/web/fundamentals/security/csp/)',
-      requiredArtifacts: ['CspMetaGatherer', 'RequestHeaders']
+      requiredArtifacts: ['CspMetaGatherer', 'ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
     const cspMetaTags = artifacts.CspMetaGatherer;
-    const headers = artifacts.RequestHeaders;
+    const headers = artifacts.ResponseHeaders;
     const hasCspMetaTags = cspMetaTags.length > 0;
     const cspHeader = headers['content-security-policy'];
     const xCspHeader = headers['x-content-security-policy'];

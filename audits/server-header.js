@@ -12,12 +12,12 @@ class ServerHeaderAudit extends Audit {
           'web server fingerprinting. The header exposes known vulnerabilities ' +
           'in unpatched versions as well as specific misconfigurations of the ' +
           'server. [Learn more](https://goo.gl/RjBJHw).',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['server'];
+    const header = artifacts.ResponseHeaders['server'];
     const hasHeader = (typeof header === 'string');
 
     if (!hasHeader) {

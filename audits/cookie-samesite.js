@@ -14,15 +14,16 @@ class SameSiteCookieAudit extends Audit {
                 'with cross-site requests. which provides some protection ' +
                 'against cross-site request forgery attacks (CSRF). ' +
                 '[Learn more](https://www.owasp.org/index.php/SameSite)',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['set-cookie'];
+    const header = artifacts.ResponseHeaders['set-cookie'];
+    const hasHeader = (typeof header === 'string');
     const params = parseHeader(header);
 
-    if (!header) {
+    if (!hasHeader) {
       return {
         rawValue: true
       };

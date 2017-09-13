@@ -2,11 +2,11 @@
 
 /* eslint-env mocha */
 
-const Gatherer = require('../../../gather/gatherers/request-headers');
+const Gatherer = require('../../../gather/gatherers/response-headers');
 const assert = require('assert');
 let gatherer;
 
-describe('RequestHeaders gatherer', () => {
+describe('ResponseHeaders gatherer', () => {
   // Reset the Gatherer before each test.
   beforeEach(() => {
     gatherer = new Gatherer();

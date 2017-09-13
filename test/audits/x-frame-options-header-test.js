@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: X-Frame-Options header audit', () => {
   it('fails if no X-Frame-Options header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': null,
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('fails if X-Frame-Options header has invalid value', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'DENIAL',
       }
     }).rawValue, false);
@@ -24,7 +24,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('fails if X-Frame-Options header is set to `ALLOW-FROM` with invalid URL', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'ALLOW-FROM invalid url',
       }
     }).rawValue, false);
@@ -32,7 +32,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('header value check is case-insenstive', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'sameorigin',
       }
     }).rawValue, true);
@@ -40,7 +40,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('passes if X-Frame-Options header is set to `DENY`', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'DENY',
       }
     }).rawValue, true);
@@ -48,7 +48,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('passes if X-Frame-Options header is set to `SAMEORIGIN`', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'SAMEORIGIN',
       }
     }).rawValue, true);
@@ -56,7 +56,7 @@ describe('Security: X-Frame-Options header audit', () => {
 
   it('passes if X-Frame-Options header is set to `ALLOW-FROM` with valid URL', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-frame-options': 'ALLOW-FROM https://example.com/',
       }
     }).rawValue, true);

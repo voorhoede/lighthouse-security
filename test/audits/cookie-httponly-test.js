@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: Cookie HttpOnly audit', () => {
   it('fails if Set-Cookie is used without HttpOnly flag', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': 'sessionid=38afes7a8; Path=/'
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: Cookie HttpOnly audit', () => {
 
   it('passes if Set-Cookie contains HttpOnly flag', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': 'sessionid=38afes7a8; HttpOnly; Path=/'
       }
     }).rawValue, true);
@@ -24,7 +24,7 @@ describe('Security: Cookie HttpOnly audit', () => {
 
   it('passes if no Set-Cookie header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'set-cookie': null
       }
     }).rawValue, true);

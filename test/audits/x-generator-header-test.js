@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: X-Generator header audit', () => {
   it('fails when X-Generator header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-generator': 'Drupal 7 (http://drupal.org)'
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: X-Generator header audit', () => {
 
   it('displays value of the X-Generator header', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-generator': 'Drupal 7 (http://drupal.org)'
       }
     }).displayValue, 'Drupal 7 (http://drupal.org)');
@@ -24,7 +24,7 @@ describe('Security: X-Generator header audit', () => {
 
   it('passes when no X-Generator header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'x-generator': null
       }
     }).rawValue, true);

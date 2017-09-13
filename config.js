@@ -17,7 +17,7 @@ module.exports = {
       ...addDirFiles(dirs.gatherers, [
         'csp-meta',
         'generator-meta',
-        'request-headers',
+        'response-headers',
       ]),
       ...addDirFiles(dirs.lighthouseGatherers, [
         'dobetterweb/anchors-with-no-rel-noopener',

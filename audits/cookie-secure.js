@@ -12,12 +12,12 @@ class SecureCookiesAudit extends Audit {
       helpText: 'Using the Secure flag ensures a cookie can only be transmitted ' +
                 'over an encrypted connection and not over the insecure HTTP. ' +
                 '[Learn more](https://www.owasp.org/index.php/SecureFlag)',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['set-cookie'];
+    const header = artifacts.ResponseHeaders['set-cookie'];
     const params = parseHeader(header);
     const isSecure = params['Secure'] === true || !header;
 

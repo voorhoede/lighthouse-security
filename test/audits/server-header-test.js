@@ -8,7 +8,7 @@ const assert = require('assert');
 describe('Security: Server header audit', () => {
   it('fails when Server header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'server': 'Apache/2.4.9 (Unix)'
       }
     }).rawValue, false);
@@ -16,7 +16,7 @@ describe('Security: Server header audit', () => {
 
   it('displays value of the Server header', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'server': 'Apache/2.4.9 (Unix)'
       }
     }).displayValue, 'Apache/2.4.9 (Unix)');
@@ -24,7 +24,7 @@ describe('Security: Server header audit', () => {
 
   it('passes when no Server header is present', () => {
     return assert.equal(Audit.audit({
-      RequestHeaders: {
+      ResponseHeaders: {
         'server': null
       }
     }).rawValue, true);

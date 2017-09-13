@@ -11,12 +11,12 @@ class XssAudit extends Audit {
       helpText: 'The HTTP `X-XSS-Protection` response header stops pages from loading ' +
                 'when they detect reflected cross-site scripting (XSS) attacks. ' +
                 '[Learn more](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection).',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['x-xss-protection'];
+    const header = artifacts.ResponseHeaders['x-xss-protection'];
     const hasXssHeader = !!header;
 
     return {

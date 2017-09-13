@@ -14,12 +14,12 @@ class XgeneratorHeaderAudit extends Audit {
           'in unpatched versions as well as specific misconfigurations in the ' +
           'framework and known file structures. ' +
           '[Learn more](https://goo.gl/XhsuhC).',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['x-generator'];
+    const header = artifacts.ResponseHeaders['x-generator'];
     const hasNoGenerator = (typeof header !== 'string');
 
     if (hasNoGenerator) {

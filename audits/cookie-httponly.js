@@ -12,12 +12,12 @@ class CookieHttpOnlyAudit extends Audit {
       helpText: 'Using the HttpOnly flag when generating a cookie helps mitigate ' +
           'the risk of client side script accessing the protected cookie. ' +
           '[Learn more](https://www.owasp.org/index.php/HttpOnly)',
-      requiredArtifacts: ['RequestHeaders']
+      requiredArtifacts: ['ResponseHeaders']
     };
   }
 
   static audit(artifacts) {
-    const header = artifacts.RequestHeaders['set-cookie'];
+    const header = artifacts.ResponseHeaders['set-cookie'];
     const params = parseHeader(header);
     const isHttpOnly = params['HttpOnly'] === true || !header;
 
