@@ -17,18 +17,17 @@ class ServerHeaderAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const headerValue = headers['server'];
-    const hasValue = (typeof headerValue === 'string');
+    const header = artifacts.RequestHeaders['server'];
+    const hasHeader = (typeof header === 'string');
 
-    if (!hasValue) {
+    if (!hasHeader) {
       return {
         rawValue: true
       };
     }
 
     return {
-      displayValue: headerValue,
+      displayValue: header,
       rawValue: false
     };
   }

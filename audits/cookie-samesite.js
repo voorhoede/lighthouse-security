@@ -1,11 +1,6 @@
 'use strict';
 const Audit = require('lighthouse').Audit;
-
-const testCookie = (cookie, pattern) => {
-  return !!(cookie || '')
-    .split(/; */)
-    .find(value => pattern.test(value));
-};
+const parseHeader = require('../lib/parse-header');
 
 // see https://tools.ietf.org/html/draft-west-first-party-cookies-06#section-4
 class SameSiteCookieAudit extends Audit {
@@ -24,17 +19,17 @@ class SameSiteCookieAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const cookie = headers['set-cookie'];
+    const header = artifacts.RequestHeaders['set-cookie'];
+    const params = parseHeader(header);
 
-    if (!cookie) {
+    if (!header) {
       return {
         rawValue: true
       };
     }
 
-    if (testCookie(cookie, /SameSite/)) {
-      if (testCookie(cookie, /SameSite=(Strict|Lax)/)) {
+    if (params['SameSite']) {
+      if (/(Strict|Lax)/.test(params['SameSite'])) {
         return {
           rawValue: true
         };

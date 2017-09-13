@@ -1,11 +1,6 @@
 'use strict';
 const Audit = require('lighthouse').Audit;
-
-const valueContainsDirective = (value, directive) => {
-  return !!value
-    .split(/; */)
-    .find(str => str === directive);
-};
+const parseHeader = require('../lib/parse-header');
 
 class StrictTransportSecurityAudit extends Audit {
   static get meta() {
@@ -23,27 +18,25 @@ class StrictTransportSecurityAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const value = headers['strict-transport-security'];
-    const hasValue = (typeof value === 'string');
+    const header = artifacts.RequestHeaders['strict-transport-security'];
+    const hasHeader = (typeof header === 'string');
+    const params = parseHeader(header);
 
-    if (!hasValue) {
+    if (!hasHeader) {
       return {
         debugString: '`Strict-Transport-Security` header is not set.',
         rawValue: false
       };
     }
 
-    const hasMaxAge = /max-age/.test(value);
-    if (!hasMaxAge) {
+    if (!params['max-age']) {
       return {
         debugString: 'The "max-age" directive is required.',
         rawValue: false
       };
     }
 
-    const maxAge = parseInt(value.match(/max-age=([0-9]+)/)[1], 10);
-    if (maxAge < 30 * 24 * 60 * 60) {
+    if (params['max-age'] < 30 * 24 * 60 * 60) {
       return {
         debugString: 'The "max-age" directive is too small. ' +
           'The minimum recommended value is 2592000 (30 days).',
@@ -51,7 +44,7 @@ class StrictTransportSecurityAudit extends Audit {
       };
     }
 
-    if (!valueContainsDirective(value, 'includeSubDomains')) {
+    if (!params['includeSubDomains']) {
       return {
         debugString: 'The "includeSubDomains" directive should be added to ' +
           'also force HTTPS for all sub domains.',
@@ -59,7 +52,7 @@ class StrictTransportSecurityAudit extends Audit {
       };
     }
 
-    if (!valueContainsDirective(value, 'preload')) {
+    if (!params['preload']) {
       return {
         debugString: 'The "preload" directive should be added so browsers ' +
           'will never connect to your domain using an insecure connection.',
@@ -68,7 +61,7 @@ class StrictTransportSecurityAudit extends Audit {
     }
 
     return {
-      displayValue: `\`${value}\``,
+      displayValue: `\`${header}\``,
       rawValue: true
     };
   }

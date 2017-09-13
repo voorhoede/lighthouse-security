@@ -1,5 +1,6 @@
 'use strict';
 const Audit = require('lighthouse').Audit;
+const parseHeader = require('../lib/parse-header');
 
 class CookieHttpOnlyAudit extends Audit {
   static get meta() {
@@ -16,9 +17,9 @@ class CookieHttpOnlyAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const setCookieHeader = headers['set-cookie'];
-    const isHttpOnly = /HttpOnly/.test(setCookieHeader) || !setCookieHeader;
+    const header = artifacts.RequestHeaders['set-cookie'];
+    const params = parseHeader(header);
+    const isHttpOnly = params['HttpOnly'] === true || !header;
 
     return {
       rawValue: isHttpOnly

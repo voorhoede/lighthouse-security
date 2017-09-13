@@ -36,26 +36,25 @@ class FrameOptionsHeaderAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const headerValue = headers['x-frame-options'];
-    const hasValue = (typeof headerValue === 'string');
+    const header = artifacts.RequestHeaders['x-frame-options'];
+    const hasHeader = (typeof header === 'string');
 
-    if (!hasValue) {
+    if (!hasHeader) {
       return {
         debugString: 'X-Frame-Options header is not set.',
         rawValue: false
       };
     }
 
-    if (!isValidOption(headerValue)) {
+    if (!isValidOption(header)) {
       return {
-        debugString: `${headerValue} is not a valid X-Frame-Options value.`,
+        debugString: `${header} is not a valid X-Frame-Options value.`,
         rawValue: false
       };
     }
 
     return {
-      displayValue: headerValue,
+      displayValue: header,
       rawValue: true
     };
   }

@@ -16,9 +16,8 @@ class XssAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const xssHeader = headers['x-xss-protection'];
-    const hasXssHeader = !!xssHeader;
+    const header = artifacts.RequestHeaders['x-xss-protection'];
+    const hasXssHeader = !!header;
 
     return {
       rawValue: hasXssHeader

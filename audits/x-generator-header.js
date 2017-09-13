@@ -19,9 +19,8 @@ class XgeneratorHeaderAudit extends Audit {
   }
 
   static audit(artifacts) {
-    const headers = artifacts.RequestHeaders;
-    const headerValue = headers['x-generator'];
-    const hasNoGenerator = (typeof headerValue !== 'string');
+    const header = artifacts.RequestHeaders['x-generator'];
+    const hasNoGenerator = (typeof header !== 'string');
 
     if (hasNoGenerator) {
       return {
@@ -30,7 +29,7 @@ class XgeneratorHeaderAudit extends Audit {
     }
 
     return {
-      displayValue: headerValue,
+      displayValue: header,
       rawValue: hasNoGenerator
     };
   }
