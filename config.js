@@ -36,6 +36,7 @@ module.exports = {
       'cookie-secure',
       'cookie-samesite',
       'generator-meta',
+      'manual-ssl-grade',
       'server-header',
       'strict-transport-security',
       'x-frame-options-header',
@@ -71,6 +72,10 @@ module.exports = {
       title: 'Fingerprinting',
       description: ''
     },
+    'manual-security-checks': {
+      title: 'Manual checks to verify',
+      description: ''
+    },
   },
 
   // Add custom sections to the default report.
@@ -94,6 +99,7 @@ module.exports = {
         {group: 'fingerprinting', id: 'server-header', weight: 0},
         {group: 'fingerprinting', id: 'x-generator-header', weight: 0},
         {group: 'fingerprinting', id: 'generator-meta', weight: 0},
+        {group: 'manual-security-checks', id: 'maual-ssl-grade', weight: 0},
       ]
     }
   }
