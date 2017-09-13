@@ -52,5 +52,8 @@ After installing dependencies using `yarn install` the following scripts are ava
 
 `yarn ...` | Description
 ---|---
+`clean` | Removes generated lighthouse and coverage reports.
+`coverage` | Runs `unit` tests and generates coverage report in `coverage/`.
 `lint` | Checks code style against the [`.eslintrc`](.eslintrc.js) configuration.
-`test` | Just runs `lint` for now.
+`test` | Runs `lint` and `unit` tests.
+`unit` | Runs all unit tests in `test/**/*-test.js`.
