@@ -35,6 +35,6 @@
     "eslint": "4.5.0",
     "eslint-config-google": "^0.9.1",
     "mocha": "3.5.0",
-    "nyc": "11.1.0"
+    "nyc": "11.2.1"
   }
 }
