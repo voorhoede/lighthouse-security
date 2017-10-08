@@ -26,7 +26,7 @@
     "websecurity"
   ],
   "dependencies": {
-    "lighthouse": "2.4.0",
+    "lighthouse": "2.5.0",
     "request": "^2.81.0",
     "valid-url": "1.0.9"
   },
