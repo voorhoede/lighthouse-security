@@ -35,7 +35,7 @@
     "valid-url": "1.0.9"
   },
   "devDependencies": {
-    "coveralls": "2.13.1",
+    "coveralls": "3.0.1",
     "eslint": "4.6.1",
     "eslint-config-google": "^0.9.1",
     "mocha": "3.5.0",
