@@ -30,15 +30,15 @@
     "websecurity"
   ],
   "dependencies": {
-    "lighthouse": "2.7.0",
+    "lighthouse": "^2.7.0",
     "request": "^2.85.0",
-    "valid-url": "1.0.9"
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "coveralls": "2.13.2",
-    "eslint": "4.6.1",
+    "coveralls": "^2.13.2",
+    "eslint": "^4.6.1",
     "eslint-config-google": "^0.9.1",
-    "mocha": "3.5.0",
-    "nyc": "11.2.1"
+    "mocha": "^5.2.0",
+    "nyc": "^11.2.1"
   }
 }
