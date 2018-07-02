@@ -30,7 +30,7 @@
     "websecurity"
   ],
   "dependencies": {
-    "lighthouse": "^2.7.0",
+    "lighthouse": "^3.0.1",
     "request": "^2.85.0",
     "valid-url": "^1.0.9"
   },
