@@ -37,7 +37,7 @@
   "devDependencies": {
     "coveralls": "^2.13.2",
     "eslint": "^4.6.1",
-    "eslint-config-google": "^0.9.1",
+    "eslint-config-google": "^0.10.0",
     "mocha": "^5.2.0",
     "nyc": "^11.2.1"
   }
